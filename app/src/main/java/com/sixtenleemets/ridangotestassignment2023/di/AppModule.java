@@ -3,6 +3,8 @@ package com.sixtenleemets.ridangotestassignment2023.di;
 import android.app.Application;
 import android.content.Context;
 
+import com.sixtenleemets.ridangotestassignment2023.adapter.TicketAdapter;
+
 import javax.inject.Singleton;
 
 import dagger.Module;
@@ -18,6 +20,12 @@ public class AppModule {
     @Singleton
     public Context provideContext(Application application) {
         return application.getApplicationContext();
+    }
+
+    @Provides
+    @Singleton
+    public TicketAdapter provideTicketAdapter() {
+        return new TicketAdapter();
     }
 
 }

@@ -68,20 +68,25 @@ public class TicketFragment extends Fragment {
                 .subscribe(new CompletableObserver() {
                     @Override
                     public void onSubscribe(@NonNull Disposable d) {
+                        Log.d(TAG, "addTicket onSubscribe");
                     }
 
                     @Override
                     public void onComplete() {
+                        Log.d(TAG, "addTicket onComplete");
                         NavHostFragment.findNavController(TicketFragment.this)
                                 .navigate(R.id.action_TicketFragment_to_DashboardFragment);
                     }
 
                     @Override
                     public void onError(@NonNull Throwable e) {
-                        Snackbar.make(binding.buttonSell, e.toString(), BaseTransientBottomBar.LENGTH_LONG)
-                                .show();
                         Log.w(TAG, "addTicket onError: ", e);
                         binding.buttonSell.setEnabled(true);
+                        Snackbar.make(
+                                binding.buttonSell,
+                                e.toString(),
+                                BaseTransientBottomBar.LENGTH_LONG
+                        ).show();
                     }
                 });
     }

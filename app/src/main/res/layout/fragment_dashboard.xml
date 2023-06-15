@@ -13,14 +13,14 @@
         android:layout_height="wrap_content"
         android:text="@string/tickets_list_empty_no_sales"
         android:textAppearance="?android:textAppearanceMedium"
-        android:visibility="gone"
+        android:visibility="visible"
         android:layout_centerInParent="true" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/tickets"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:visibility="visible"
+        android:visibility="gone"
         android:layout_above="@+id/addTicket" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
