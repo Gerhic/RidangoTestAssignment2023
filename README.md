@@ -1,4 +1,3 @@
-# RidangoTestAssignment2023
 Ticket selling example Android app in Java using
 * Hilt for dependency injection
 * Room for database
