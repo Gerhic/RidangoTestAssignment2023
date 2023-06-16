@@ -6,6 +6,4 @@ Ticket selling example Android app in Java using
 * Protobuf for serialization
 
 TODO:
-* Serialization using Protocol Buffer
-* Retrofit requests with mock responses
 * Write tests
