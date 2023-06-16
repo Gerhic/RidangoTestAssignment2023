@@ -5,7 +5,7 @@ import android.app.Application;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 
-import com.sixtenleemets.ridangotestassignment2023.data.model.Ticket;
+import com.sixtenleemets.ridangotestassignment2023.data.model.TicketEntity;
 import com.sixtenleemets.ridangotestassignment2023.data.repository.TicketRepository;
 
 import java.util.List;
@@ -26,11 +26,11 @@ public class TicketViewModel extends AndroidViewModel {
         this.ticketRepository = ticketRepository;
     }
 
-    public LiveData<List<Ticket>> getTicketsLiveData() {
+    public LiveData<List<TicketEntity>> getTicketsLiveData() {
         return ticketRepository.getAllTickets();
     }
 
-    public void addTicket(Ticket ticket) {
+    public void addTicket(TicketEntity ticket) {
         ticketRepository.addTicket(ticket);
     }
 

@@ -10,7 +10,7 @@ import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.sixtenleemets.ridangotestassignment2023.R;
-import com.sixtenleemets.ridangotestassignment2023.data.model.Ticket;
+import com.sixtenleemets.ridangotestassignment2023.data.model.TicketEntity;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -22,9 +22,9 @@ import dagger.hilt.android.scopes.FragmentScoped;
 @FragmentScoped
 public class TicketAdapter extends RecyclerView.Adapter<TicketAdapter.TicketViewHolder> {
 
-    private final List<Ticket> tickets = new ArrayList<>();
+    private final List<TicketEntity> tickets = new ArrayList<>();
 
-    public void setTickets(List<Ticket> newTickets) {
+    public void setTickets(List<TicketEntity> newTickets) {
         TicketDiffCallback diffCallback = new TicketDiffCallback(tickets, newTickets);
         DiffUtil.DiffResult diffResult = DiffUtil.calculateDiff(diffCallback);
 
@@ -44,7 +44,7 @@ public class TicketAdapter extends RecyclerView.Adapter<TicketAdapter.TicketView
     @Override
     public void onBindViewHolder(@NonNull TicketViewHolder holder, int position) {
         // Bind the ticket data to the view holder
-        Ticket ticket = tickets.get(position);
+        TicketEntity ticket = tickets.get(position);
         holder.bind(ticket);
     }
 
@@ -66,7 +66,7 @@ public class TicketAdapter extends RecyclerView.Adapter<TicketAdapter.TicketView
             dateTextView = itemView.findViewById(R.id.dateTextView);
         }
 
-        public void bind(Ticket ticket) {
+        public void bind(TicketEntity ticket) {
             // Bind the ticket data to the view elements
             productNameTextView.setText(ticket.getProductName());
             priceTextView.setText(String.valueOf(ticket.getPrice()));
@@ -79,10 +79,10 @@ public class TicketAdapter extends RecyclerView.Adapter<TicketAdapter.TicketView
     }
 
     private static class TicketDiffCallback extends DiffUtil.Callback {
-        private final List<Ticket> oldTickets;
-        private final List<Ticket> newTickets;
+        private final List<TicketEntity> oldTickets;
+        private final List<TicketEntity> newTickets;
 
-        public TicketDiffCallback(List<Ticket> oldTickets, List<Ticket> newTickets) {
+        public TicketDiffCallback(List<TicketEntity> oldTickets, List<TicketEntity> newTickets) {
             this.oldTickets = oldTickets;
             this.newTickets = newTickets;
         }
@@ -99,15 +99,15 @@ public class TicketAdapter extends RecyclerView.Adapter<TicketAdapter.TicketView
 
         @Override
         public boolean areItemsTheSame(int oldItemPosition, int newItemPosition) {
-            Ticket oldTicket = oldTickets.get(oldItemPosition);
-            Ticket newTicket = newTickets.get(newItemPosition);
+            TicketEntity oldTicket = oldTickets.get(oldItemPosition);
+            TicketEntity newTicket = newTickets.get(newItemPosition);
             return oldTicket.getId() == newTicket.getId();
         }
 
         @Override
         public boolean areContentsTheSame(int oldItemPosition, int newItemPosition) {
-            Ticket oldTicket = oldTickets.get(oldItemPosition);
-            Ticket newTicket = newTickets.get(newItemPosition);
+            TicketEntity oldTicket = oldTickets.get(oldItemPosition);
+            TicketEntity newTicket = newTickets.get(newItemPosition);
             return oldTicket.equals(newTicket);
         }
     }

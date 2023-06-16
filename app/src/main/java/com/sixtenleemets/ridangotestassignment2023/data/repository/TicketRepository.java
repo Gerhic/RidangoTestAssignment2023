@@ -3,7 +3,7 @@ package com.sixtenleemets.ridangotestassignment2023.data.repository;
 import androidx.lifecycle.LiveData;
 
 import com.sixtenleemets.ridangotestassignment2023.data.database.TicketDao;
-import com.sixtenleemets.ridangotestassignment2023.data.model.Ticket;
+import com.sixtenleemets.ridangotestassignment2023.data.model.TicketEntity;
 
 import java.util.List;
 
@@ -17,11 +17,11 @@ public class TicketRepository {
         this.ticketDao = ticketDao;
     }
 
-    public LiveData<List<Ticket>> getAllTickets() {
+    public LiveData<List<TicketEntity>> getAllTickets() {
         return ticketDao.getAllTickets();
     }
 
-    public void addTicket(Ticket ticket) {
+    public void addTicket(TicketEntity ticket) {
         ticketDao.insert(ticket);
     }
 

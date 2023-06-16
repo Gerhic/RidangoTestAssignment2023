@@ -6,14 +6,14 @@ import androidx.room.PrimaryKey;
 import java.util.Date;
 
 @Entity(tableName = "tickets")
-public class Ticket {
+public class TicketEntity {
     @PrimaryKey(autoGenerate = true)
     private int id;
     private String productName;
     private float price;
     private long dateMillis;
 
-    public Ticket(String productName, float price) {
+    public TicketEntity(String productName, float price) {
         this.productName = productName;
         this.price = price;
         this.dateMillis = new Date().getTime();

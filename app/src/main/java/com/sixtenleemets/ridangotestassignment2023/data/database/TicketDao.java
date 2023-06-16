@@ -6,15 +6,15 @@ import androidx.room.Dao;
 import androidx.room.Insert;
 import androidx.room.Query;
 
-import com.sixtenleemets.ridangotestassignment2023.data.model.Ticket;
+import com.sixtenleemets.ridangotestassignment2023.data.model.TicketEntity;
 
 import java.util.List;
 
 @Dao
 public interface TicketDao {
     @Insert
-    void insert(Ticket ticket);
+    void insert(TicketEntity ticket);
 
     @Query("SELECT * FROM tickets")
-    LiveData<List<Ticket>> getAllTickets();
+    LiveData<List<TicketEntity>> getAllTickets();
 }

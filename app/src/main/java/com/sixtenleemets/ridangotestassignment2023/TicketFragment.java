@@ -14,7 +14,7 @@ import androidx.navigation.fragment.NavHostFragment;
 
 import com.google.android.material.snackbar.BaseTransientBottomBar;
 import com.google.android.material.snackbar.Snackbar;
-import com.sixtenleemets.ridangotestassignment2023.data.model.Ticket;
+import com.sixtenleemets.ridangotestassignment2023.data.model.TicketEntity;
 import com.sixtenleemets.ridangotestassignment2023.databinding.FragmentTicketBinding;
 
 import javax.inject.Inject;
@@ -56,12 +56,12 @@ public class TicketFragment extends Fragment {
             button.setEnabled(false);
             String productName = binding.productName.getText().toString();
             String productPrice = binding.price.getText().toString();
-            Ticket ticket = new Ticket(productName, Float.parseFloat(productPrice));
+            TicketEntity ticket = new TicketEntity(productName, Float.parseFloat(productPrice));
             addTicket(ticket);
         });
     }
 
-    private void addTicket(Ticket ticket) {
+    private void addTicket(TicketEntity ticket) {
         Completable.fromAction(() -> ticketViewModel.addTicket(ticket))
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
