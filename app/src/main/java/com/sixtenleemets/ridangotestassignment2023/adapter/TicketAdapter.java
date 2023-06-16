@@ -69,7 +69,7 @@ public class TicketAdapter extends RecyclerView.Adapter<TicketAdapter.TicketView
         public void bind(TicketEntity ticket) {
             // Bind the ticket data to the view elements
             productNameTextView.setText(ticket.getProductName());
-            priceTextView.setText(String.valueOf(ticket.getPrice()));
+            priceTextView.setText(String.valueOf(ticket.getPriceCents()));
 
             // Format and display the date
             SimpleDateFormat dateFormat = new SimpleDateFormat(DATETIME_FORMAT, Locale.getDefault());

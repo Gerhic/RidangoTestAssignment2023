@@ -35,11 +35,11 @@ public class TicketEntity {
         this.productName = productName;
     }
 
-    public int getPrice() {
+    public int getPriceCents() {
         return priceCents;
     }
 
-    public void setPrice(int priceCents) {
+    public void setPriceCents(int priceCents) {
         this.priceCents = priceCents;
     }
 

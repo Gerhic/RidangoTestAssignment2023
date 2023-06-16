@@ -1,6 +1,7 @@
 package com.sixtenleemets.ridangotestassignment2023.di;
 
 import com.sixtenleemets.ridangotestassignment2023.data.database.TicketDao;
+import com.sixtenleemets.ridangotestassignment2023.data.network.TicketApiService;
 import com.sixtenleemets.ridangotestassignment2023.data.repository.TicketRepository;
 
 import javax.inject.Singleton;
@@ -16,7 +17,7 @@ public class RepositoryModule {
 
     @Singleton
     @Provides
-    TicketRepository provideTicketRepository(TicketDao ticketDao) {
-        return new TicketRepository(ticketDao);
+    TicketRepository provideTicketRepository(TicketDao ticketDao, TicketApiService ticketApiService) {
+        return new TicketRepository(ticketDao, ticketApiService);
     }
 }

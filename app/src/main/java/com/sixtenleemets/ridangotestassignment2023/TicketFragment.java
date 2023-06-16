@@ -1,5 +1,6 @@
 package com.sixtenleemets.ridangotestassignment2023;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -7,6 +8,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -20,11 +22,6 @@ import com.sixtenleemets.ridangotestassignment2023.databinding.FragmentTicketBin
 import javax.inject.Inject;
 
 import dagger.hilt.android.AndroidEntryPoint;
-import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
-import io.reactivex.rxjava3.core.Completable;
-import io.reactivex.rxjava3.core.CompletableObserver;
-import io.reactivex.rxjava3.disposables.Disposable;
-import io.reactivex.rxjava3.schedulers.Schedulers;
 
 @AndroidEntryPoint
 public class TicketFragment extends Fragment {
@@ -54,43 +51,27 @@ public class TicketFragment extends Fragment {
         binding.price.addTextChangedListener(getTextWatcher());
         binding.buttonSell.setOnClickListener(button -> {
             button.setEnabled(false);
+            closeKeyboard();
             String productName = binding.productName.getText().toString();
             String productPrice = binding.price.getText().toString();
             TicketEntity ticket = new TicketEntity(productName, Integer.parseInt(productPrice));
-            addTicket(ticket);
+            ticketViewModel.addTicket(ticket);
+        });
+
+        ticketViewModel.getTicketAddedLiveData().observe(getViewLifecycleOwner(), ticketAdded -> {
+            if (ticketAdded) {
+                // Ticket added successfully
+                NavHostFragment.findNavController(TicketFragment.this)
+                        .navigate(R.id.action_TicketFragment_to_DashboardFragment);
+            } else {
+                // Failed to add ticket
+                Snackbar.make(view, "Failed to add ticket", BaseTransientBottomBar.LENGTH_LONG)
+                        .show();
+                Log.w(TAG, "ticket not added");
+                binding.buttonSell.setEnabled(true);
+            }
         });
     }
-
-    private void addTicket(TicketEntity ticket) {
-        Completable.fromAction(() -> ticketViewModel.addTicket(ticket))
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new CompletableObserver() {
-                    @Override
-                    public void onSubscribe(@NonNull Disposable d) {
-                        Log.d(TAG, "addTicket onSubscribe");
-                    }
-
-                    @Override
-                    public void onComplete() {
-                        Log.d(TAG, "addTicket onComplete");
-                        NavHostFragment.findNavController(TicketFragment.this)
-                                .navigate(R.id.action_TicketFragment_to_DashboardFragment);
-                    }
-
-                    @Override
-                    public void onError(@NonNull Throwable e) {
-                        Log.w(TAG, "addTicket onError: ", e);
-                        binding.buttonSell.setEnabled(true);
-                        Snackbar.make(
-                                binding.buttonSell,
-                                e.toString(),
-                                BaseTransientBottomBar.LENGTH_LONG
-                        ).show();
-                    }
-                });
-    }
-
 
     @NonNull
     private TextWatcher getTextWatcher() {
@@ -110,6 +91,14 @@ public class TicketFragment extends Fragment {
                 binding.buttonSell.setEnabled(hasName && hasPrice);
             }
         };
+    }
+
+    private void closeKeyboard() {
+        View view = getView();
+        if (view != null) {
+            InputMethodManager imm = (InputMethodManager) requireContext().getSystemService(Context.INPUT_METHOD_SERVICE);
+            imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+        }
     }
 
 }
