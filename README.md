@@ -6,4 +6,5 @@ Ticket selling example Android app in Java using
 * Protobuf for serialization
 
 TODO:
+* UX improvements 
 * Write tests
