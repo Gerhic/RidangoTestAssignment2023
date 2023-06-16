@@ -56,7 +56,7 @@ public class TicketFragment extends Fragment {
             button.setEnabled(false);
             String productName = binding.productName.getText().toString();
             String productPrice = binding.price.getText().toString();
-            TicketEntity ticket = new TicketEntity(productName, Float.parseFloat(productPrice));
+            TicketEntity ticket = new TicketEntity(productName, Integer.parseInt(productPrice));
             addTicket(ticket);
         });
     }

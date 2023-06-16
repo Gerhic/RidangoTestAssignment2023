@@ -10,12 +10,12 @@ public class TicketEntity {
     @PrimaryKey(autoGenerate = true)
     private int id;
     private String productName;
-    private float price;
+    private int priceCents;
     private long dateMillis;
 
-    public TicketEntity(String productName, float price) {
+    public TicketEntity(String productName, int priceCents) {
         this.productName = productName;
-        this.price = price;
+        this.priceCents = priceCents;
         this.dateMillis = new Date().getTime();
     }
 
@@ -35,12 +35,12 @@ public class TicketEntity {
         this.productName = productName;
     }
 
-    public float getPrice() {
-        return price;
+    public int getPrice() {
+        return priceCents;
     }
 
-    public void setPrice(int price) {
-        this.price = price;
+    public void setPrice(int priceCents) {
+        this.priceCents = priceCents;
     }
 
     public long getDateMillis() {
@@ -51,3 +51,4 @@ public class TicketEntity {
         this.dateMillis = dateMillis;
     }
 }
+
